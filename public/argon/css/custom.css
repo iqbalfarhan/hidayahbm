@@ -1,0 +1,9 @@
+@media print {
+	.noprint {
+		visibility: hidden;
+	}
+}
+.text-number{
+	text-align: right;
+	font-family: consolas;
+}
