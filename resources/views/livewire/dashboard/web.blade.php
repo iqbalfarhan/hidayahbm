@@ -1,4 +1,7 @@
 <div>
+	<p>
+		<a href="{{ url('/') }}" class="btn btn-default"><i class="fa fa-check mr-2"></i>Halaman web</a>
+	</p>
 	<div class="card shadow">
 		<div class="card-header border-0">
 			<div class="row align-items-center">

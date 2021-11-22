@@ -19,6 +19,7 @@ class CreateKegiatansTable extends Migration
             $table->string('slug');
             $table->string('photo')->nullable();
             $table->text('isi')->nullable();
+            $table->string('tag')->nullable();
             $table->timestamps();
         });
     }

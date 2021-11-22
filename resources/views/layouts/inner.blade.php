@@ -24,6 +24,7 @@
   <link href="{{ url('arsha/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
   <link href="{{ url('arsha/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
   <link href="{{ url('arsha/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url('/argon/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}" type="text/css">
 
   <!-- Template Main CSS File -->
   <link href="{{ url('arsha/css/style.css') }}" rel="stylesheet">

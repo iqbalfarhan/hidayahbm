@@ -18,7 +18,7 @@
 					<h4>Profil Lainnya</h4>
 					<ul>
 						@foreach (App\Profil::all() as $profil)
-							<li><i class="bx bx-chevron-right"></i> <a href="{{ route('web.profil', $profil->slug) }}">{{ $profil->judul }}</a></li>
+							<li><i class="bx bx-chevron-right"></i> <a href="{{ route('web.profil',$profil->slug) }}">{{ $profil->judul }}</a></li>
 						@endforeach
 					</ul>
 				</div>
@@ -27,7 +27,7 @@
 					<h4>Layanan Kami</h4>
 					<ul>
 						@foreach ($layanan as $lyn)
-							<li><i class="bx bx-chevron-right"></i> <a href="#">{{ $lyn->nama }}</a></li>
+							<li><i class="bx bx-chevron-right"></i> <a href="#layanan" class="scrollto">{{ $lyn->nama }}</a></li>
 						@endforeach
 					</ul>
 				</div>

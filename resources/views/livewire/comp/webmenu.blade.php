@@ -25,7 +25,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('web.layanan') }}" class="nav-link {{ Route::is('web.layanan') ? "active" : "" }}">
-                            <span class="sidenav-normal">Segmen Bisnis</span>
+                            <span class="sidenav-normal">Layanan</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -39,31 +39,25 @@
         <li class="nav-item">
             <a class="nav-link" href="#">
                 <i class="ni ni-paper-diploma text-primary"></i>
-                <span class="nav-link-text">Sertifikat & Surat</span>
+                <span class="nav-link-text">Legalitas & Lisensi</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('web.galeri') }}">
-                <i class="ni ni-album-2 text-primary"></i>
-                <span class="nav-link-text">Galeri foto</span>
+                <i class="fa fa-folder text-primary"></i>
+                <span class="nav-link-text">File Manager</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ route('web.kegiatan') }}">
                 <i class="ni ni-calendar-grid-58 text-primary"></i>
-                <span class="nav-link-text">Berita Kegiatan</span>
+                <span class="nav-link-text">Kegiatan & Acara</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('web.paket') }}">
                 <i class="ni ni-books text-primary"></i>
-                <span class="nav-link-text">Paket Menu</span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="ni ni-compass-04 text-primary"></i>
-                <span class="nav-link-text">Alamat dan kontak</span>
+                <span class="nav-link-text">Paket Makanan</span>
             </a>
         </li>
     </ul>

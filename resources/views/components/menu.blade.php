@@ -4,12 +4,15 @@
 
 <nav id="navbar" class="navbar navbar-light">
 	<ul>
+		@auth
+			<li><a class="nav-link" href="{{ route('home') }}">Editor</a></li>
+		@endauth
 		<li><a class="nav-link scrollto active" href="{{ url('/') }}#hero">Home</a></li>
 		<li class="dropdown">
-			<a href="{{ url('/') }}#"><span>Profil</span> <i class="bi bi-chevron-down"></i></a>
+			<a href="#!"><span>Profil</span> <i class="bi bi-chevron-down"></i></a>
 			<ul>
 				@foreach (App\Profil::get() as $profil)
-					<li><a href="{{ route('web.profil', $profil->slug) }}">{{ $profil->judul }}</a></li>
+				<li><a href="{{ route('web.profil', $profil->slug) }}">{{ $profil->judul }}</a></li>
 				@endforeach
 
 				<li><a href="{{ route('web.legalitas') }}">Legalitas & Lisensi</a></li>
