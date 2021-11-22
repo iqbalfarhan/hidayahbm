@@ -2,33 +2,46 @@
 
 namespace App\Http\Livewire\Webadmin;
 
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use App\Profil;
 use Livewire\Component;
 
 class Admprofil extends Component
 {
+    public $allowAdd = true;
+    public $files;
+
     public $judul;
-    public $allowAdd = false;
     public $isi;
     public $slug;
     public $photo;
 
+
     public $datas;
     public $newslug;
+    public $newjudul;
 
     public $queryString = ['slug', 'allowAdd'];
 
     public function mount()
     {
+        $this->files = Storage::allFiles();
         $this->datas = Profil::all();
         $this->slug = $this->slug ?? "pengantar";
         $this->updatedSlug($this->slug);
+    }
+
+    public function updatedNewjudul($judul)
+    {
+        $this->newslug = Str::slug($judul, "-");
     }
 
     public function addNewSlug()
     {
         $this->slug = $this->newslug;
         $this->updatedSlug($this->slug);
+        $this->judul = $this->newjudul;
         $this->dispatchBrowserEvent('closeModal', ['id' => 'createProfil']);
     }
 

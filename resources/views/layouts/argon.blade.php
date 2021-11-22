@@ -26,7 +26,7 @@
     <div class="scrollbar-inner">
       <div class="sidenav-header d-flex align-items-center">
         <a class="navbar-brand" href="{{ route('home') }}">
-          <img src="{{ url('/argon/img/brand/blue.png') }}" class="navbar-brand-img" alt="{{ config('app.name') }}">
+          <img src="{{ url(perusahaan('logo') ?? '/argon/img/brand/blue.png') }}" class="navbar-brand-img" alt="{{ config('app.name') }}">
         </a>
         <div class="ml-auto">
           <div class="sidenav-toggler d-none d-xl-block" data-action="sidenav-unpin" data-target="#sidenav-main">
@@ -147,13 +147,13 @@
         <div class="row align-items-center justify-content-lg-between">
           <div class="col-lg-6">
             <div class="copyright text-center text-lg-left text-muted">
-              &copy; {{ date('Y') }} <a href="{{ url('/') }}" class="font-weight-bold ml-1">{{ config('app.name') }}</a>
+              &copy; {{ date('Y') }} <a href="{{ url('/') }}" class="font-weight-bold ml-1">{{ perusahaan('nama') }}</a>
             </div>
           </div>
           <div class="col-lg-6">
             <ul class="nav nav-footer justify-content-center justify-content-lg-end">
               <li class="nav-item">
-                <a href="#" class="nav-link">IS &bull; {{ config('app.desc') }}</a>
+                <a href="#" class="nav-link">{{ perusahaan('nama') }}</a>
               </li>
             </ul>
           </div>

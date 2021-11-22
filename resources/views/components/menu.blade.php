@@ -8,11 +8,12 @@
 		<li class="dropdown">
 			<a href="{{ url('/') }}#"><span>Profil</span> <i class="bi bi-chevron-down"></i></a>
 			<ul>
-				<li><a href="{{ url('/') }}#about" class="scrollto">Kata Pengantar</a></li>
-				<li><a href="{{ route('web.profil', 'sejarah') }}">Sejarah Berdiri</a></li>
-				<li><a href="{{ route('web.profil', 'visi') }}">Visi & Misi Perusahaan</a></li>
-				<li><a href="{{ route('web.profil', 'legalitas') }}">Legalitas & Lisensi</a></li>
-				<li><a href="{{ route('web.profil', 'gallery') }}">Gallery Kegiatan</a></li>
+				@foreach (App\Profil::get() as $profil)
+					<li><a href="{{ route('web.profil', $profil->slug) }}">{{ $profil->judul }}</a></li>
+				@endforeach
+
+				<li><a href="{{ route('web.legalitas') }}">Legalitas & Lisensi</a></li>
+				<li><a href="{{ route('web.galeri') }}">Gallery Kegiatan</a></li>
 				<li><a href="{{ url('/') }}#strorg" class="scrollto">Struktur Organisasi</a></li>
 			</ul>
 		</li>
