@@ -83,6 +83,7 @@
   </main><!-- End #main -->
 
   <x-footer></x-footer>
+  <div id="preloader"></div>
 
   <!-- Vendor JS Files -->
   <script src="{{ url('arsha/vendor/aos/aos.js') }}"></script>
