@@ -4,7 +4,7 @@
 			<div class="row">
 
 				<div class="col-lg-3 col-md-6 footer-contact">
-					<h3>{{ perusahaan('nama') }}</h3>
+					<h5>{{ perusahaan('nama') }}</h5>
 					<p>
 						{{ perusahaan('alamat') }}
 						<br>
@@ -18,7 +18,7 @@
 					<h4>Profil Lainnya</h4>
 					<ul>
 						@foreach (App\Profil::all() as $profil)
-							<li><i class="bx bx-chevron-right"></i> <a href="{{ route('web.profil',$profil->slug) }}">{{ $profil->judul }}</a></li>
+						<li><i class="bx bx-chevron-right"></i> <a href="{{ route('web.profil',$profil->slug) }}">{{ $profil->judul }}</a></li>
 						@endforeach
 					</ul>
 				</div>
@@ -27,7 +27,7 @@
 					<h4>Layanan Kami</h4>
 					<ul>
 						@foreach ($layanan as $lyn)
-							<li><i class="bx bx-chevron-right"></i> <a href="#layanan" class="scrollto">{{ $lyn->nama }}</a></li>
+						<li><i class="bx bx-chevron-right"></i> <a href="#layanan" class="scrollto">{{ $lyn->nama }}</a></li>
 						@endforeach
 					</ul>
 				</div>
@@ -57,3 +57,7 @@
 		</div>
 	</div>
 </footer>
+
+<div id="preloader"></div>
+<a href="https://api.whatsapp.com/send?phone={{ perusahaan('whatsapp') }}&text=Hallo, saya ingin bertanya." class="whatsapp-button d-flex align-items-center justify-content-center"><i class="bi bi-whatsapp"></i></a>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

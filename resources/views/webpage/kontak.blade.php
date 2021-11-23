@@ -3,7 +3,6 @@
 
 		<div class="section-title">
 			<h2>Kontak kami</h2>
-			<p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
 		</div>
 
 		<div class="row">
@@ -41,30 +40,7 @@
 
 			</div>
 
-			<div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-				<form action="{{ route('kirim.whatsapp') }}" method="POST" role="form" class="info">
-					@csrf
-					<div class="row">
-						<div class="form-group col-md-6">
-							<label for="name">Nama anda</label>
-							<input type="text" name="name" class="form-control" id="name" required>
-						</div>
-						<div class="form-group col-md-6">
-							<label for="name">Subjek pesan</label>
-							<input type="text" class="form-control" name="subject" id="subject" required>
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="name">Pesan</label>
-						<textarea class="form-control" name="message" rows="10" required></textarea>
-					</div>
-					<div class="text-center">
-						<button type="submit" class="btn btn-success">
-							<span class="bi bi-whatsapp mr-2"></span> Kirim Whatsapp
-						</button>
-					</div>
-				</form>
-			</div>
+			@livewire('comp.kirimwhatsapp')
 
 		</div>
 

@@ -41,5 +41,20 @@ class PerusahaanSeeder extends Seeder
             'parameter' => 'logo',
             'value' => '/storage/logo.png',
         ]);
+
+        Perusahaan::create([
+            'parameter' => 'latitude',
+            'value' => '',
+        ]);
+
+        Perusahaan::create([
+            'parameter' => 'longitude',
+            'value' => '',
+        ]);
+
+        Perusahaan::create([
+            'parameter' => 'whatsapp',
+            'value' => '+628999779527',
+        ]);
     }
 }
