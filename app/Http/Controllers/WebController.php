@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Kegiatan;
 use App\Profil;
 use App\Paket;
 use Illuminate\Http\Request;
@@ -41,10 +42,50 @@ class WebController extends Controller
 
         $data = [
             'bread' => ['profil', $slug],
+            'title' => $datas->judul,
+            'datas' => $datas,
+            'view' => $slug ? $slug : "all"
+        ];
+        return view('webdetail.profil', $data);
+    }
+
+    public function legalitas()
+    {
+        $data = [
+            'bread' => ['profil', 'legalitas'],
             'title' => 'Profil '.$slug,
             'datas' => $datas,
             'view' => $slug ? $slug : "all"
         ];
         return view('webdetail.profil', $data);
+    }
+
+    public function galeri()
+    {
+        $data = [
+            'bread' => ['profil', 'galeri'],
+            'title' => 'Profil '.$slug,
+            'datas' => $datas,
+            'view' => $slug ? $slug : "all"
+        ];
+        return view('webdetail.profil', $data);
+    }
+
+    public function kegiatan($slug = null)
+    {
+        if ($slug) {
+            $datas = Kegiatan::where('slug', $slug)->first();
+        }
+        else{
+            $datas = Kegiatan::all();
+        }
+
+        $data = [
+            'bread' => ['kegiatan', $slug ?? "Semua kegiatan"],
+            'title' => $slug ? $datas->judul : "Semua kegiatan",
+            'datas' => $datas,
+            'view' => $slug ? $slug : "all"
+        ];
+        return view('webdetail.kegiatan', $data);
     }
 }

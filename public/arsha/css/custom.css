@@ -1,0 +1,42 @@
+.sidebar-links {
+  margin-bottom: 30px;
+}
+.sidebar-links h4 {
+  font-size: 16px;
+  font-weight: bold;
+  color: #37517e;
+  position: relative;
+  padding-bottom: 12px;
+}
+.sidebar-links {
+  margin-bottom: 30px;
+}
+.sidebar-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sidebar-links ul i {
+  padding-right: 2px;
+  color: #47b2e4;
+  font-size: 18px;
+  line-height: 1;
+}
+.sidebar-links ul li {
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+}
+.sidebar-links ul li:first-child {
+  padding-top: 0;
+}
+.sidebar-links ul a {
+  color: #777777;
+  transition: 0.3s;
+  display: inline-block;
+  line-height: 1;
+}
+.sidebar-links ul a:hover {
+  text-decoration: none;
+  color: #47b2e4;
+}

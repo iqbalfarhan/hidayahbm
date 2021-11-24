@@ -34,7 +34,7 @@
 
 	<div class="row">
 		<div class="col-md-12 text-center">
-			<a href="#" class="buy-btn">Kegiatan Lainnya</a>
+			<a href="{{ route('guest.kegiatan') }}" class="buy-btn">Kegiatan Lainnya</a>
 		</div>
 	</div>
 </section>

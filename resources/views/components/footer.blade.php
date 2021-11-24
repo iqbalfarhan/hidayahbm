@@ -4,7 +4,7 @@
 			<div class="row">
 
 				<div class="col-lg-3 col-md-6 footer-contact">
-					<h5>{{ perusahaan('nama') }}</h5>
+					<h4>{{ perusahaan('nama') }}</h4>
 					<p>
 						{{ perusahaan('alamat') }}
 						<br>
@@ -18,7 +18,7 @@
 					<h4>Profil Lainnya</h4>
 					<ul>
 						@foreach (App\Profil::all() as $profil)
-						<li><i class="bx bx-chevron-right"></i> <a href="{{ route('web.profil',$profil->slug) }}">{{ $profil->judul }}</a></li>
+						<li><i class="bx bx-chevron-right"></i> <a href="{{ route('guest.profil',$profil->slug) }}">{{ $profil->judul }}</a></li>
 						@endforeach
 					</ul>
 				</div>

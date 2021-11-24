@@ -18,6 +18,6 @@ class Kegiatan extends Model
 
     public function getGambarAttribute()
     {
-        return $this->photo ?? '/storage/noimage.jpg';
+        return $this->photo ?? '/storage/nobanner.jpg';
     }
 }

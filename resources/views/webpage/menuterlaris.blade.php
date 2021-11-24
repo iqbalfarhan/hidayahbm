@@ -17,7 +17,7 @@
 							<li><i class="bx bx-check"></i> {{ $menu }}</li>
 						@endforeach
 					</ul>
-					<a href="{{ route('web.menu', ['paket' => $paket->id]) }}" class="buy-btn">Detail Paket</a>
+					<a href="{{ route('guest.menu', ['paket' => $paket->id]) }}" class="buy-btn">Detail Paket</a>
 				</div>
 			</div>
 			@endforeach
@@ -26,7 +26,7 @@
 
 		<div class="row">
 			<div class="col-md-12 text-center">
-				<a href="{{ route('web.menu') }}" class="buy-btn">Lihat {{ App\Paket::count()-3 }} Paket Lainnya</a>
+				<a href="{{ route('guest.menu') }}" class="buy-btn">Lihat Paket Lainnya</a>
 			</div>
 		</div>
 

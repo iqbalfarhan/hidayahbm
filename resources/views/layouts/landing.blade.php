@@ -28,6 +28,7 @@
 
   <!-- Template Main CSS File -->
   <link href="{{ url('arsha/css/style.css') }}" rel="stylesheet">
+  <link href="{{ url('arsha/css/custom.css') }}" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: Arsha - v4.6.0

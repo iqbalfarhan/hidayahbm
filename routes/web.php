@@ -13,12 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'WebController@index')->name('web.index');
-Route::get('/menu/{slug?}', 'WebController@menu')->name('web.menu');
-Route::get('/profil/{slug?}', 'WebController@profil')->name('web.profil');
-Route::get('/legalitas', 'WebController@legalitas')->name('web.legalitas');
-Route::get('/galeri', 'WebController@galeri')->name('web.galeri');
-Route::get('/kegiatan/{slug?}', 'WebController@kegiatan')->name('web.kegiatan');
+Route::get('/', 'WebController@index')->name('guest.index');
+Route::get('/menu/{slug?}', 'WebController@menu')->name('guest.menu');
+Route::get('/profil/{slug?}', 'WebController@profil')->name('guest.profil');
+Route::get('/legalitas', 'WebController@legalitas')->name('guest.legalitas');
+Route::get('/galeri', 'WebController@galeri')->name('guest.galeri');
+Route::get('/kegiatan/{slug?}', 'WebController@kegiatan')->name('guest.kegiatan');
 Route::post('/kirim/whatsapp', 'WebController@kirimwhatsapp')->name('kirim.whatsapp');
 
 Auth::routes([

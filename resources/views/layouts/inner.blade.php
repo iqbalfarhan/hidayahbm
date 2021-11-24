@@ -28,6 +28,7 @@
 
   <!-- Template Main CSS File -->
   <link href="{{ url('arsha/css/style.css') }}" rel="stylesheet">
+  <link href="{{ url('arsha/css/custom.css') }}" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: Arsha - v4.6.0
@@ -88,6 +89,7 @@
 
   <!-- Template Main JS File -->
   <script src="{{ url('arsha/js/main.js') }}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
 
 </body>
 
