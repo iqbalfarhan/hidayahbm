@@ -29,6 +29,9 @@
 		</div>
 	</div>
 	@else
+	<div class="section-title">
+		<h2>Gallery & Kegiatan</h2>
+	</div>
 	<div class="row" data-masonry='{"percentPosition": true }'>
 		@foreach ($datas as $data)
 		<div class="col-md-3">

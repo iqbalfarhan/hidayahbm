@@ -25,7 +25,7 @@
 			<h5 class="">Menu lainnya :</h5>
 			<div class="list-group">
 				@foreach (App\Paket::all() as $paket)
-				<a href="{{ route('web.menu', ['paket' => $paket->id]) }}" class="list-group-item">{{ $paket->nama }}</a>
+				<a href="{{ route('guest.menu', ['paket' => $paket->id]) }}" class="list-group-item">{{ $paket->nama }}</a>
 				@endforeach
 			</div>
 		</div>
@@ -33,6 +33,9 @@
 	@endif
 
 	@if ($view == "all")
+	<div class="section-title">
+		<h2>Contoh paket</h2>
+	</div>
 	<div class="row">
 		@foreach ($datas as $paket)
 		<div class="col-lg-4 mt-4 mt-lg-0 mb-4" data-aos="fade-up" data-aos-delay="200">
@@ -43,7 +46,7 @@
 					<li><i class="bx bx-check"></i> {{ $menu }}</li>
 					@endforeach
 				</ul>
-				<a href="{{ route('web.menu', ['paket' => $paket->id]) }}" class="buy-btn">Detail Paket</a>
+				<a href="{{ route('guest.menu', ['paket' => $paket->id]) }}" class="buy-btn">Detail Paket</a>
 			</div>
 		</div>
 		@endforeach

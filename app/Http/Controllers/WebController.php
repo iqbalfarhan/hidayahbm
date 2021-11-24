@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Legalitas;
 use App\Kegiatan;
 use App\Profil;
 use App\Paket;
