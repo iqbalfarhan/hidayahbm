@@ -37,7 +37,7 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ route('web.legalitas') }}">
                 <i class="ni ni-paper-diploma text-primary"></i>
                 <span class="nav-link-text">Legalitas & Lisensi</span>
             </a>

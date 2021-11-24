@@ -14,9 +14,9 @@
 				@foreach (App\Profil::get() as $profil)
 				<li><a href="{{ route('guest.profil', $profil->slug) }}">{{ $profil->judul }}</a></li>
 				@endforeach
-
+				<hr>
 				<li><a href="{{ route('guest.legalitas') }}">Legalitas & Lisensi</a></li>
-				<li><a href="{{ route('guest.galeri') }}">Gallery Kegiatan</a></li>
+				<li><a href="{{ route('guest.kegiatan') }}">Gallery Kegiatan</a></li>
 				<li><a href="{{ url('/') }}#strorg" class="scrollto">Struktur Organisasi</a></li>
 			</ul>
 		</li>

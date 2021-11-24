@@ -54,14 +54,14 @@ Route::group(['middleware' => 'auth'], function(){
 
     });
 
-    Route::group(['prefix' => 'web', 'middleware' => 'ceklevel:web'], function(){
+    Route::group(['prefix' => 'adminweb', 'middleware' => 'ceklevel:web'], function(){
         Route::get('profil', 'Webprofile\ProfilController@index')->name('web.profil.index');
 
         Route::get('profil/strorg', 'Webprofile\ProfilController@strorg')->name('web.profil.strorg');
         Route::get('profil/rekanan', 'Webprofile\ProfilController@rekanan')->name('web.profil.rekanan');
         Route::get('profil/layanan', 'Webprofile\LayananController@index')->name('web.layanan');
 
-        Route::get('sertifikat', 'Webprofile\SertifikatController@index')->name('web.sertifikat');
+        Route::get('legalitas', 'Webprofile\LegalitasController@index')->name('web.legalitas');
         Route::get('galeri', 'Webprofile\GaleriController@index')->name('web.galeri');
         Route::get('kegiatan', 'Webprofile\KegiatanController@index')->name('web.kegiatan');
         Route::get('paket/', 'Webprofile\PaketController@index')->name('web.paket');

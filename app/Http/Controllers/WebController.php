@@ -53,22 +53,10 @@ class WebController extends Controller
     {
         $data = [
             'bread' => ['profil', 'legalitas'],
-            'title' => 'Profil '.$slug,
-            'datas' => $datas,
-            'view' => $slug ? $slug : "all"
+            'title' => 'Legalistas dan lisensi',
+            'datas' => Legalitas::all(),
         ];
-        return view('webdetail.profil', $data);
-    }
-
-    public function galeri()
-    {
-        $data = [
-            'bread' => ['profil', 'galeri'],
-            'title' => 'Profil '.$slug,
-            'datas' => $datas,
-            'view' => $slug ? $slug : "all"
-        ];
-        return view('webdetail.profil', $data);
+        return view('webdetail.legalitas', $data);
     }
 
     public function kegiatan($slug = null)

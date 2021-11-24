@@ -10,6 +10,7 @@ class ProfilController extends Controller
     public function index()
     {
         $data = [
+            'title' => 'Profil perusahaan',
             'page' => 'webadmin.admprofil'
         ];
 
@@ -19,6 +20,7 @@ class ProfilController extends Controller
     public function strorg()
     {
         $data = [
+            'title' => 'Struktur Organisasi',
             'page' => 'webadmin.admstrorg'
         ];
 
@@ -28,6 +30,7 @@ class ProfilController extends Controller
     public function rekanan()
     {
         $data = [
+            'title' => 'Perusahaan rekanan',
             'page' => 'webadmin.admrekanan'
         ];
 

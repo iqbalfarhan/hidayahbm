@@ -3,8 +3,7 @@
 @section('content')
 <div class="row">
 	<div class="col-md-8">
-		<h1 class="mb-0">{{ $datas->judul }}</h1>
-		<img src="{{ url($datas->gambar) }}" alt="" class="w-100 rounded shadow-sm my-5">
+		<img src="{{ url($datas->gambar) }}" alt="" class="w-100 rounded shadow-sm mb-5">
 		<p style="text-indent: 50px!important; text-align: justify;">
 			{!! str_replace("<br />", "</p><p style=\"text-indent: 50px; text-align: justify;\">", nl2br($datas->isi)) !!}
 		</p>
