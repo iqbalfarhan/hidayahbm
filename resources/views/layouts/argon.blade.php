@@ -87,26 +87,8 @@
                 @livewire('comp.notiv-admin')
               </li>
             @endif
-            <li class="nav-item dropdown">
-              <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="ni ni-ungroup"></i>
-              </a>
-              <div class="dropdown-menu dropdown-menu-lg dropdown-menu-dark bg-default dropdown-menu-right">
-                <div class="row shortcuts px-4">
-                  <a href="" class="col-4 shortcut-item">
-                    <span class="shortcut-media avatar rounded-circle bg-gradient-red">
-                      <i class="ni ni-calendar-grid-58"></i>
-                    </span>
-                    <small>Kalender</small>
-                  </a>
-                  <a href="#!" class="col-4 shortcut-item">
-                    <span class="shortcut-media avatar rounded-circle bg-gradient-green">
-                      <i class="ni ni-books"></i>
-                    </span>
-                    <small>Cetak Laporan</small>
-                  </a>
-                </div>
-              </div>
+            <li class="nav-item">
+              <a href="" class="nav-link"><i class="fa fa-globe"></i> Preview web</a>
             </li>
           </ul>
           @livewire('comp.usernav')
@@ -130,10 +112,10 @@
             </div>
             <div class="col-lg-6 col-5 text-right">
               @if (isset($withNew) && $withNew == true)
-              <a href="#createLembur" class="btn btn-sm btn-neutral" data-toggle="modal">New</a>
+              <a href="#create" class="btn btn-sm btn-neutral" data-toggle="modal">New</a>
               @endif
               @if (isset($withFilter) && $withFilter == true)
-              <a href="#filterLembur" class="btn btn-sm btn-neutral" data-toggle="modal">Filter</a>
+              <a href="#filter" class="btn btn-sm btn-neutral" data-toggle="modal">Filter</a>
               @endif
             </div>
           </div>

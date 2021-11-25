@@ -18,7 +18,7 @@
   <nav id="navbar-main" class="navbar navbar-horizontal navbar-transparent navbar-main navbar-expand-lg navbar-light">
     <div class="container">
       <a class="navbar-brand" href="{{ route('home') }}">
-        <img src="{{ url('/argon/img/brand/white.png') }}">
+        <img src="{{ url(perusahaan('logo') ?? '/argon/img/brand/white.png') }}">
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -85,7 +85,7 @@
           <div class="row justify-content-center">
             <div class="col-xl-5 col-lg-6 col-md-8 px-5">
               <h1 class="text-white">Selamat datang!</h1>
-              <p class="text-lead text-white">Silakan login untuk menggunakan aplikasi perhitungan lembur Ovtimys.</p>
+              <p class="text-lead text-white">{{ env('APP_DESC') }}</p>
             </div>
           </div>
         </div>
@@ -111,7 +111,7 @@
         <div class="col-xl-6">
           <ul class="nav nav-footer justify-content-center justify-content-xl-end">
             <li class="nav-item">
-              <a href="#" class="nav-link">IS &bull; Overtime Payment Management System</a>
+              <a href="#" class="nav-link">{{ env('APP_DESC') }}</a>
             </li>
           </ul>
         </div>

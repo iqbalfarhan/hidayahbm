@@ -13,6 +13,7 @@ class Admrekanan extends Component
     public $datas;
     public $selected;
     public $no = 1;
+    public $existPhoto;
 
     public $nama;
     public $photo;
@@ -30,13 +31,13 @@ class Admrekanan extends Component
         $rekanan = Rekanan::find($id);
         $this->selected = $id;
         $this->ednama = $rekanan->nama;
-        $this->edphoto = $rekanan->photo;
+        $this->gambar = $rekanan->gambar;
         $this->dispatchBrowserEvent('openModal', ['id' => 'editRekanan']);
     }
 
     public function delete($id)
     {
-        $this->selected = Rekanan::find($id)->toArray();
+        $this->selected = Rekanan::find($id);
         $this->dispatchBrowserEvent('openModal', ['id' => 'deleteRekanan']);
     }
 
@@ -44,13 +45,28 @@ class Admrekanan extends Component
     {
         $val = $this->validate([
             'ednama' => 'required',
-            'edphoto' => 'required',
         ]);
 
         Rekanan::find($id)->update([
             'nama' => $this->ednama,
-            'photo' => $this->edphoto,
         ]);
+
+        if ($this->photo) {
+            $filename = $this->photo->getClientOriginalName();
+            $this->photo->storeAs('rekanan', $filename);
+
+            Rekanan::find($id)->update([
+                'photo' => '/storage/rekanan/'.$filename
+            ]);
+
+            $this->reset('existPhoto');
+        }
+
+        if ($this->existPhoto) {
+            Rekanan::find($id)->update([
+                'photo' => '/storage/'.$this->existPhoto
+            ]);
+        }
 
         $this->mount();
         $this->dispatchBrowserEvent('closeModal', ['id' => 'editRekanan']);
@@ -74,15 +90,35 @@ class Admrekanan extends Component
     {
         $val = $this->validate([
             'nama' => 'required',
-            'photo' => 'required',
         ]);
-        Rekanan::create($val);
+
+        $create = Rekanan::create([
+            'nama' => $this->nama,
+        ]);
+
+        if ($this->photo) {
+            $filename = $this->photo->getClientOriginalName();
+            $this->photo->storeAs('rekanan', $filename);
+
+            Rekanan::find($create->id)->update([
+                'photo' => '/storage/rekanan/'.$filename
+            ]);
+
+            $this->reset('existPhoto');
+        }
+
+        if ($this->existPhoto) {
+            Rekanan::find($create->id)->update([
+                'photo' => '/storage/'.$this->existPhoto
+            ]);
+        }
 
         $this->mount();
-        $this->dispatchBrowserEvent('closeModal', ['id' => 'createRekanan']);
+        $this->dispatchBrowserEvent('closeModal', ['id' => 'create']);
         $this->reset([
             'nama',
             'photo',
+            'existPhoto'
         ]);
     }
 

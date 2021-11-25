@@ -33,8 +33,8 @@
 				</div>
 
 				<div class="col-lg-3 col-md-6 footer-links">
-					<h4>Sosial Media</h4>
-					<p>Cras fermentum odio eu feugiat lide par naso tierra videa magna derita valies</p>
+					<h4>Kontak kami</h4>
+					<p>{{ perusahaan('nama') }}</p>
 					<div class="social-links mt-3">
 						<a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
 						<a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
@@ -50,10 +50,10 @@
 
 	<div class="container footer-bottom clearfix">
 		<div class="copyright">
-			&copy; Copyright <strong><span>Arsha</span></strong>. All Rights Reserved
+			&copy; Copyright <strong><span>{{ perusahaan('nama') }}</span></strong>. All Rights Reserved
 		</div>
 		<div class="credits">
-			Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+			Designed by <a href="{{ url('/') }}">{{ perusahaan('nama') }}</a>
 		</div>
 	</div>
 </footer>

@@ -1,46 +1,32 @@
 <div>
-    <div class="card">
-        <div class="card-header">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <h3 class="card-title mb-0">Perusahaan Rekanan</h3>
-                </div>
-                <div class="col-md-6 text-right">
-                    <button data-toggle="modal" data-target="#createRekanan" class="btn btn-primary btn-sm">tambah baru</button>
+    <div class="row">
+        @foreach ($datas as $data)
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <a href="#!">
+                        <img src="{{ url($data->gambar) }}" class="rounded-circle img-center img-fluid shadow shadow-lg--hover" style="width: 140px; height: 140px;">
+                    </a>
+                    <div class="pt-4 text-center">
+                        <h5 class="h3 title">
+                            <span class="d-block mb-1">{{ $data->nama }}</span>
+                        </h5>
+                        <div class="mt-3">
+                            <button wire:click="edit({{ $data->id }})" class="btn btn-success btn-icon-only rounded-circle">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                            <button wire:click="delete({{ $data->id }})" class="btn btn-danger btn-icon-only rounded-circle">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="card-body p-0">
-            <div class="table-responsive">
-                <table class="table">
-                    <thead class="table-light">
-                        <th scope="col">No</th>
-                        <th scope="col">Nama Perusahaan</th>
-                        <th scope="col">Icon</th>
-                        <th scope="col" class="text-center">Action</th>
-                    </thead>
-                    <tbody>
-                        @foreach($datas as $data)
-                        <tr>
-                            <td>{{ $no++ }}</td>
-                            <td>{{ $data->nama }}</td>
-                            <td class="p-2">
-                                <img src="{{ url($data->gambar) }}" alt="{{ $data->nama }}" style="height: 30pt;">
-                            </td>
-                            <td class="p-2 text-center">
-                                <button wire:click="edit({{ $data->id }})" class="btn btn-success btn-sm mx-0"><i class="fa fa-edit"></i></button>
-                                <button wire:click="delete({{ $data->id }})" class="btn btn-danger btn-sm mx-0"><i class="fa fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
+        @endforeach
     </div>
 
-    <div wire:ignore.self class="modal fade" tabindex="-1" role="dialog" id="createRekanan">
+    <div wire:ignore.self class="modal fade" tabindex="-1" role="dialog" id="create">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -52,13 +38,39 @@
                 <form wire:submit.prevent="submit" method="POST">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="nama">Nama rekanan</label>
-                            <input type="text" class="form-control" wire:model="nama" id="nama" placeholder="">
+                            <label class="form-control-label" for="nama">Nama Perusahaan</label>
+                            <input type="text" class="form-control @error('nama') is-invalid @enderror" wire:model="nama" id="nama" placeholder="Nama Perusahaan">
+                            @if($errors->has('nama'))
+                                <span class="invalid-feedback">{{ $errors->first('nama') }}</span>
+                            @endif
                         </div>
+
                         <div class="form-group">
-                            <label for="photo">Keterangan</label>
-                            <input type="file" class="form-control" wire:model="photo" id="photo" placeholder="">
+                            <label class="form-control-label" for="photo">Logo perusahaan</label>
+                            <input type="file" class="form-control @error('photo') is-invalid @enderror" wire:model="photo" id="photo" placeholder="">
+                            @if($errors->has('photo'))
+                                <span class="invalid-feedback">{{ $errors->first('photo') }}</span>
+                            @endif
                         </div>
+
+                        @if ($photo == "")
+                            <div class="form-group">
+                                <label class="form-control-label" for="existPhoto">Atau pilih photo yang sudah ada</label>
+                                <select class="form-control @error('existPhoto') is-invalid @enderror" wire:model="existPhoto" id="existPhoto">
+                                    <option value=""></option>
+                                    @foreach (gambarYangAda('/rekanan') as $gbr)
+                                        <option value="{{ $gbr }}">{{ $gbr }}</option>
+                                    @endforeach
+                                </select>
+                                @if($errors->has('existPhoto'))
+                                    <span class="invalid-feedback">{{ $errors->first('existPhoto') }}</span>
+                                @endif
+
+                                @if ($existPhoto)
+                                    <img src="{{ '/storage/'.$existPhoto }}" alt="" class="avatar rounded-circle mt-2">
+                                @endif
+                            </div>
+                        @endif
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -82,19 +94,39 @@
                 <form wire:submit.prevent="updateRekanan({{ $selected }})" method="POST">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="nama">Nama rekanan</label>
-                            <input type="text" class="form-control" wire:model="ednama" id="nama" placeholder="">
-                            @if($errors->has('edname'))
-                            <span class="invalid-feedback">{{ $errors->first('edname') }}</span>
+                            <label class="form-control-label" for="ednama">Nama Perusahaan</label>
+                            <input type="text" class="form-control @error('ednama') is-invalid @enderror" wire:model="ednama" id="ednama" placeholder="Nama Perusahaan">
+                            @if($errors->has('ednama'))
+                                <span class="invalid-feedback">{{ $errors->first('ednama') }}</span>
                             @endif
                         </div>
+
                         <div class="form-group">
-                            <label for="photo">Keterangan</label>
-                            <input type="file" class="form-control" wire:model="edphoto" id="photo" placeholder="">
+                            <label class="form-control-label" for="edphoto">Logo perusahaan</label>
+                            <input type="file" class="form-control @error('edphoto') is-invalid @enderror" wire:model="edphoto" id="edphoto" placeholder="">
                             @if($errors->has('edphoto'))
-                            <span class="invalid-feedback">{{ $errors->first('edphoto') }}</span>
+                                <span class="invalid-feedback">{{ $errors->first('edphoto') }}</span>
                             @endif
                         </div>
+
+                        @if ($edphoto == "")
+                            <div class="form-group">
+                                <label class="form-control-label" for="existPhoto">Atau pilih photo yang sudah ada</label>
+                                <select class="form-control @error('existPhoto') is-invalid @enderror" wire:model="existPhoto" id="existPhoto">
+                                    <option value=""></option>
+                                    @foreach (gambarYangAda('/rekanan') as $gbr)
+                                        <option value="{{ $gbr }}">{{ $gbr }}</option>
+                                    @endforeach
+                                </select>
+                                @if($errors->has('existPhoto'))
+                                    <span class="invalid-feedback">{{ $errors->first('existPhoto') }}</span>
+                                @endif
+
+                                @if ($existPhoto)
+                                    <img src="{{ '/storage/'.$existPhoto }}" alt="" class="avatar rounded-circle mt-2">
+                                @endif
+                            </div>
+                        @endif
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>

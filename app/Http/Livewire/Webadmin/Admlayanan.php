@@ -36,7 +36,7 @@ class Admlayanan extends Component
 
     public function delete($id)
     {
-        $this->selected = Layanan::find($id)->toArray();
+        $this->selected = Layanan::find($id);
         $this->dispatchBrowserEvent('openModal', ['id' => 'deleteLayanan']);
     }
 
@@ -83,7 +83,7 @@ class Admlayanan extends Component
         Layanan::create($val);
 
         $this->mount();
-        $this->dispatchBrowserEvent('closeModal', ['id' => 'createLayanan']);
+        $this->dispatchBrowserEvent('closeModal', ['id' => 'create']);
         $this->reset([
             'nama',
             'keterangan',

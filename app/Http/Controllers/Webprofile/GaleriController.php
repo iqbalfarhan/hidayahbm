@@ -10,7 +10,8 @@ class GaleriController extends Controller
     public function index()
     {
         $data = [
-            'title' => 'Gallery Photo dan kegiatan',
+            'withNew' => true,
+            'title' => 'File manager',
             'page' => 'webadmin.admgaleri'
         ];
         return view('drawer', $data);

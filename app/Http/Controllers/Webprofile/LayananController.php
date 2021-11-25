@@ -10,6 +10,7 @@ class LayananController extends Controller
     public function index()
     {
         $data = [
+            'withNew' => true,
             'title' => 'data Segemen layanan',
             'page' => 'webadmin.admlayanan'
         ];

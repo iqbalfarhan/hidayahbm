@@ -10,6 +10,7 @@ class LegalitasController extends Controller
     public function index()
     {
         $data = [
+            'withNew' => true,
             'title' => 'Legalitas dan lisensi',
             'page' => 'webadmin.admlegalitas'
         ];

@@ -55,7 +55,7 @@ function gambarYangAda($path = "/storage")
 	/*$dir = Storage::directories();
     array_splice($dir, array_search("livewire-tmp", $dir ), 1);
     $this->dirs = $dir;*/
-    $allfiles = Storage::allFiles();
+    $allfiles = Storage::allFiles($path);
 
     return collect(array_filter($allfiles, function($str){
         return strpos($str, "livewire-tmp/") !== 0 && $str != ".gitignore";

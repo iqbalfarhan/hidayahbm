@@ -17,33 +17,55 @@ class Admgaleri extends Component
     public $dirs;
     public $filename;
 
+    public $selectedFile;
+
+    public $queryString = [
+        'path'
+    ];
+
     public function mount()
     {
+        $this->path = $this->path ?? "";
+
         $dir = Storage::directories();
         array_splice($dir, array_search("livewire-tmp", $dir ), 1);
         $this->dirs = $dir;
-        $allfiles = Storage::allFiles();
 
+        $allfiles = Storage::files($this->path);
         $this->files = collect(array_filter($allfiles, function($str){
             return strpos($str, "livewire-tmp/") !== 0 && $str != ".gitignore";
         }));
         
     }
 
+    public function updatedPath($path)
+    {
+        $this->mount();
+    }
+
     public function updatedFilterpath($path)
     {
-        if ($path != "") {
-            $this->files = Storage::allFiles($path);
-        }
-        else{
-            $this->mount();
-        }
+        $this->path = $path;
+        $this->mount();
+    }
+
+    public function selectFile($file)
+    {
+        $this->selectedFile = $file;
+        $this->dispatchBrowserEvent('openModal', ['id' => 'deleteFile']);
     }
 
     public function hapusFile($filename)
     {
         Storage::delete($filename);
         $this->mount();
+        $this->dispatchBrowserEvent('closeModal', ['id' => 'deleteFile']);
+        $this->unsetSelectedFile();
+    }
+
+    public function unsetSelectedFile()
+    {
+        $this->reset('selectedFile');
     }
 
     public function storeFile()

@@ -20,6 +20,7 @@ class ProfilController extends Controller
     public function strorg()
     {
         $data = [
+            'withNew' => true,
             'title' => 'Struktur Organisasi',
             'page' => 'webadmin.admstrorg'
         ];
@@ -30,6 +31,7 @@ class ProfilController extends Controller
     public function rekanan()
     {
         $data = [
+            'withNew' => true,
             'title' => 'Perusahaan rekanan',
             'page' => 'webadmin.admrekanan'
         ];

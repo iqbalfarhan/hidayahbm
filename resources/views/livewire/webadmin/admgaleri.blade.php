@@ -3,7 +3,7 @@
         <div class="card-header">
             <div class="row align-items-center">
                 <div class="col-md-6">
-                    <h3 class="card-title mb-0">Gallery view</h3>
+                    <h3 class="card-title mb-0">Photo File Manager</h3>
                 </div>
                 <div class="col-md-6 text-right">
                     <button data-toggle="modal" data-target="#uploadGambar" class="btn btn-primary btn-sm mx-0"><i class="fa fa-upload mr-2"></i>upload</button>
@@ -16,37 +16,37 @@
                 </div>
             </div>
         </div>
-        <div class="card-body p-0">
-            <div class="table-responsive">
-                <table class="table align-items-center">
-                    <thead class="table-light">
-                        <th scope="col">Preview</th>
-                        <th scope="col">File name</th>
-                        <th scope="col">Copy path</th>
-                        <th scope="col" class="text-center">Action</th>
-                    </thead>
-                    <tbody>
-                        @foreach($files as $file)
-                        <tr>
-                            <td class="py-2 text-center">
-                                <img src="{{ url('/storage/'.$file) }}" alt="" class="avatar">
-                            </td>
-                            <td>{{ $file }}</td>
-                            <td>/storage/{{ $file }}</td>
-                            <td class="py-2 text-center">
-                                <button class="btn btn-info btn-sm mx-0"><i class="fa fa-copy"></i></button>
-                                <button wire:click="hapusFile('{{ $file }}')" class="btn btn-danger btn-sm mx-0"><i class="fa fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+        <div class="card-body">
+            {{ $selectedFile }}
+            <div class="row">
+                @if ($path == "")
+                    @foreach ($dirs as $dir)
+                    <div class="col-md-2 text-center" wire:click="$set('path', '{{ $dir }}')">
+                        <div class="card shadow mb-3">
+                            <div class="card-body">
+                                <h1 class="display-1"><i class="fa fa-folder"></i></h1>
+                                <small>{{ $dir }}</small>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                @endif
 
+                @foreach ($files as $file)
+                    <div class="col-md-2 text-center">
+                        <div class="card shadow mb-3">
+                            <div class="card-body" wire:click="selectFile('{{ $file }}')">
+                                <img src="{{ url('/storage/'.$file) }}" alt="" class="w-100">
+                                <small>{{ $file }}</small>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
         </div>
     </div>
 
-    <div wire:ignore.self class="modal fade" tabindex="-1" role="dialog" id="uploadGambar">
+    <div wire:ignore.self class="modal fade" tabindex="-1" role="dialog" id="create">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -79,5 +79,29 @@
             </div>
         </div>
     </div>
+
+    <div wire:ignore.self class="modal fade" tabindex="-1" role="dialog" id="deleteFile">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Hapus file</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                @if ($selectedFile)
+                    <div class="modal-body">
+                        <p>Anda yakin akan menghapus file ini</p>
+                        {{ $selectedFile }}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" wire:click="unsetSelectedFile" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" wire:click="hapusFile('{{ $selectedFile }}')" class="btn btn-danger">Hapus file</button>
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+        
 
 </div>

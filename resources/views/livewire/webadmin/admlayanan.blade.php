@@ -1,46 +1,28 @@
 <div>
-    <div class="card">
-        <div class="card-header">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <h3 class="card-title mb-0">Segment bisnis (Layanan)</h3>
-                </div>
-                <div class="col-md-6 text-right">
-                    <button data-toggle="modal" data-target="#createLayanan" class="btn btn-primary btn-sm">tambah baru</button>
-                </div>
-            </div>
-        </div>
-        <div class="card-body p-0">
-            <div class="table-responsive">
-                <table class="table">
-                    <thead class="table-light">
-                        <th scope="col">No</th>
-                        <th scope="col">Nama Layanan</th>
-                        <th scope="col">Keterangan</th>
-                        <th scope="col">Icon</th>
-                        <th scope="col" class="text-center">Action</th>
-                    </thead>
-                    <tbody>
-                        @foreach($datas as $data)
-                        <tr>
-                            <td>{{ $no++ }}</td>
-                            <td>{{ $data->nama }}</td>
-                            <td>{{ $data->keterangan }}</td>
-                            <td><i class="{{ $data->icon }}"></i> {{ $data->icon }}</td>
-                            <td class="p-2 text-center">
-                                <button wire:click="edit({{ $data->id }})" class="btn btn-success btn-sm mx-0"><i class="fa fa-edit"></i></button>
-                                <button wire:click="delete({{ $data->id }})" class="btn btn-danger btn-sm mx-0"><i class="fa fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+    <div class="row">
+        @foreach ($datas as $data)
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <i class="display-1 mb-4 {{ $data->icon }}"></i>
+                        <h3 class="text-primary">{{ $data->nama }}</h3>
+                        <p>{{ $data->keterangan }}</p>
 
-        </div>
+                        <div class="mt-3">
+                            <button wire:click="edit({{ $data->id }})" class="btn btn-success btn-icon-only rounded-circle">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                            <button wire:click="delete({{ $data->id }})" class="btn btn-danger btn-icon-only rounded-circle">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
     </div>
 
-    <div wire:ignore.self class="modal fade" tabindex="-1" role="dialog" id="createLayanan">
+    <div wire:ignore.self class="modal fade" tabindex="-1" role="dialog" id="create">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -52,17 +34,30 @@
                 <form wire:submit.prevent="submit" method="POST">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="nama">Nama layanan</label>
-                            <input type="text" class="form-control" wire:model="nama" id="nama" placeholder="">
+                            <label class="form-control-label" for="nama">Nama layanan</label>
+                            <input type="text" class="form-control @error('nama') is-invalid @enderror" wire:model="nama" id="nama" placeholder="Nama layanan">
+                            @if($errors->has('nama'))
+                                <span class="invalid-feedback">{{ $errors->first('nama') }}</span>
+                            @endif
                         </div>
+
                         <div class="form-group">
-                            <label for="keterangan">Keterangan</label>
-                            <input type="text" class="form-control" wire:model="keterangan" id="keterangan" placeholder="">
+                            <label class="form-control-label" for="keterangan">Keterangan layanan</label>
+                            <input type="text" class="form-control @error('keterangan') is-invalid @enderror" wire:model="keterangan" id="keterangan" placeholder="keterangan">
+                            @if($errors->has('keterangan'))
+                                <span class="invalid-feedback">{{ $errors->first('keterangan') }}</span>
+                            @endif
                         </div>
+
                         <div class="form-group">
-                            <label for="icon">class icon</label>
-                            <input type="text" class="form-control" wire:model="icon" id="icon" placeholder="">
-                            <small class="form-text">https://icons.getbootstrap.com/ contoh : bi bi-alarm-fill</small>
+                            <label class="form-control-label" for="icon">Icon layanan</label>
+                            <input type="text" class="form-control @error('icon') is-invalid @enderror" wire:model="icon" id="icon" placeholder="contoh ni ni-spaceship">
+                            @if($errors->has('icon'))
+                                <span class="invalid-feedback">{{ $errors->first('icon') }}</span>
+                            @endif
+
+                            <a target="_blank" href="https://demos.creative-tim.com/argon-dashboard-pro/pages/components/icons.html" class="form-text">Nucleo icons</a>
+                            <a target="_blank" href="https://fontawesome.com/v5.15/icons?d=gallery&p=2&s=brands,duotone,light,regular,solid&m=free" class="form-text">Font Awesome</a>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -87,26 +82,30 @@
                 <form wire:submit.prevent="updateLayanan({{ $selected }})" method="POST">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="nama">Nama layanan</label>
-                            <input type="text" class="form-control" wire:model="ednama" id="nama" placeholder="">
-                            @if($errors->has('edname'))
-                            <span class="invalid-feedback">{{ $errors->first('edname') }}</span>
+                            <label class="form-control-label" for="ednama">Nama layanan</label>
+                            <input type="text" class="form-control @error('ednama') is-invalid @enderror" wire:model="ednama" id="ednama" placeholder="Nama layanan">
+                            @if($errors->has('ednama'))
+                                <span class="invalid-feedback">{{ $errors->first('ednama') }}</span>
                             @endif
                         </div>
+
                         <div class="form-group">
-                            <label for="keterangan">Keterangan</label>
-                            <input type="text" class="form-control" wire:model="edketerangan" id="keterangan" placeholder="">
+                            <label class="form-control-label" for="edketerangan">Keterangan layanan</label>
+                            <input type="text" class="form-control @error('edketerangan') is-invalid @enderror" wire:model="edketerangan" id="edketerangan" placeholder="keterangan">
                             @if($errors->has('edketerangan'))
-                            <span class="invalid-feedback">{{ $errors->first('edketerangan') }}</span>
+                                <span class="invalid-feedback">{{ $errors->first('edketerangan') }}</span>
                             @endif
                         </div>
+
                         <div class="form-group">
-                            <label for="icon">class icon</label>
-                            <input type="text" class="form-control" wire:model="edicon" id="icon" placeholder="">
+                            <label class="form-control-label" for="edicon">Icon layanan</label>
+                            <input type="text" class="form-control @error('edicon') is-invalid @enderror" wire:model="edicon" id="edicon" placeholder="contoh ni ni-spaceship">
                             @if($errors->has('edicon'))
-                            <span class="invalid-feedback">{{ $errors->first('edicon') }}</span>
+                                <span class="invalid-feedback">{{ $errors->first('edicon') }}</span>
                             @endif
-                            <small class="form-text">https://icons.getbootstrap.com/ contoh : bi bi-alarm-fill</small>
+
+                            <a target="_blank" href="https://demos.creative-tim.com/argon-dashboard-pro/pages/components/icons.html" class="form-text">Nucleo icons</a>
+                            <a target="_blank" href="https://fontawesome.com/v5.15/icons?d=gallery&p=2&s=brands,duotone,light,regular,solid&m=free" class="form-text">Font Awesome</a>
                         </div>
                     </div>
                     <div class="modal-footer">

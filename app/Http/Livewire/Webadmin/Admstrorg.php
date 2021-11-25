@@ -4,11 +4,15 @@ namespace App\Http\Livewire\Webadmin;
 
 use App\Organisasi;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Admstrorg extends Component
 {
+    use WithFileUploads;
+
     public $datas;
     public $selected;
+    public $existPhoto;
     public $no = 1;
 
     public $nama;
@@ -33,13 +37,13 @@ class Admstrorg extends Component
         $this->ednama = $organisasi->nama;
         $this->edjabatan = $organisasi->jabatan;
         $this->edtelp = $organisasi->telp;
-        $this->edphoto = $organisasi->photo;
+        $this->gambar = $organisasi->gambar;
         $this->dispatchBrowserEvent('openModal', ['id' => 'editOrganisasi']);
     }
 
     public function delete($id)
     {
-        $this->selected = Organisasi::find($id)->toArray();
+        $this->selected = Organisasi::find($id);
         $this->dispatchBrowserEvent('openModal', ['id' => 'deleteOrganisasi']);
     }
 
@@ -49,15 +53,29 @@ class Admstrorg extends Component
             'ednama' => 'required',
             'edjabatan' => 'required',
             'edtelp' => 'required',
-            'edphoto' => 'required',
+            'edphoto' => '',
         ]);
 
         Organisasi::find($id)->update([
             'nama' => $this->ednama,
             'jabatan' => $this->edjabatan,
             'telp' => $this->edtelp,
-            'photo' => $this->edphoto,
         ]);
+
+        if ($this->edphoto) {
+            $filename = $this->edphoto->getClientOriginalName();
+            $this->edphoto->storeAs('strorg', $filename);
+
+            Organisasi::find($id)->update([
+                'photo' => '/storage/strorg/'.$filename
+            ]);
+        }
+
+        if ($this->existPhoto) {
+            Organisasi::find($id)->update([
+                'photo' => '/storage/'.$this->existPhoto
+            ]);
+        }
 
         $this->mount();
         $this->dispatchBrowserEvent('closeModal', ['id' => 'editOrganisasi']);
@@ -67,6 +85,7 @@ class Admstrorg extends Component
             'edjabatan',
             'edtelp',
             'edphoto',
+            'existPhoto',
         ]);
     }
 
@@ -81,21 +100,43 @@ class Admstrorg extends Component
 
     public function submit()
     {
-        $val = $this->validate([
+        $this->validate([
             'nama' => 'required',
             'jabatan' => 'required',
-            'photo' => 'required',
+            'photo' => 'image|max:2048',
             'telp' => 'required',
         ]);
-        Organisasi::create($val);
+
+        $create = Organisasi::create([
+            'nama' => $this->nama,
+            'jabatan' => $this->jabatan,
+            'telp' => $this->telp,
+        ]);
+
+        if ($this->photo) {
+            $filename = $this->photo->getClientOriginalName();
+            $this->photo->storeAs('strorg', $filename);
+
+            Organisasi::find($create->id)->update([
+                'photo' => '/storage/strorg/'.$filename
+            ]);
+        }
+
+        if ($this->existPhoto) {
+            Organisasi::find($create->id)->update([
+                'photo' => '/storage/'.$this->existPhoto
+            ]);
+        }
 
         $this->mount();
-        $this->dispatchBrowserEvent('closeModal', ['id' => 'createOrganisasi']);
+        $this->dispatchBrowserEvent('closeModal', ['id' => 'create']);
         $this->reset([
+            'selected',
             'nama',
             'jabatan',
-            'photo',
             'telp',
+            'photo',
+            'existPhoto',
         ]);
     }
 
