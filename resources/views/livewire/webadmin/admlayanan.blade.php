@@ -81,6 +81,8 @@
                 @if ($selected)
                 <form wire:submit.prevent="updateLayanan({{ $selected }})" method="POST">
                     <div class="modal-body">
+
+                        {{ $selected }}
                         <div class="form-group">
                             <label class="form-control-label" for="ednama">Nama layanan</label>
                             <input type="text" class="form-control @error('ednama') is-invalid @enderror" wire:model="ednama" id="ednama" placeholder="Nama layanan">
@@ -128,9 +130,11 @@
                     </button>
                 </div>
                 @if ($selected)
-                <form wire:submit.prevent="deleteLayanan({{ $selected['id'] }})" method="POST">
+                <form wire:submit.prevent="deleteLayanan({{ $selected }})" method="POST">
                     <div class="modal-body">
                         anda yakin akan menghapus layanan ini?
+
+                        {{ $selected }}
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
