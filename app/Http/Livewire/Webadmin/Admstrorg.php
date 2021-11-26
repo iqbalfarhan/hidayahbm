@@ -34,6 +34,7 @@ class Admstrorg extends Component
     {
         $organisasi = Organisasi::find($id);
         $this->selected = $id;
+
         $this->ednama = $organisasi->nama;
         $this->edjabatan = $organisasi->jabatan;
         $this->edtelp = $organisasi->telp;
@@ -43,7 +44,7 @@ class Admstrorg extends Component
 
     public function delete($id)
     {
-        $this->selected = Organisasi::find($id);
+        $this->selected = $id;
         $this->dispatchBrowserEvent('openModal', ['id' => 'deleteOrganisasi']);
     }
 

@@ -148,7 +148,7 @@
                     </button>
                 </div>
                 @if ($selected)
-                <form wire:submit.prevent="deleteRekanan({{ $selected['id'] }})" method="POST">
+                <form wire:submit.prevent="deleteRekanan({{ $selected }})" method="POST">
                     <div class="modal-body">
                         anda yakin akan menghapus rekanan ini?
                     </div>

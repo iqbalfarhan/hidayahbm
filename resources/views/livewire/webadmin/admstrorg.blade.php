@@ -198,13 +198,13 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title">Edit layanan</h5>
+					<h5 class="modal-title">Hapus dari struktur</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				@if ($selected)
-				<form wire:submit.prevent="deleteOrganisasi({{ $selected['id'] }})" method="POST">
+				<form wire:submit.prevent="deleteOrganisasi({{ $selected }})" method="POST">
 					<div class="modal-body">
 						anda yakin akan menghapus dari struktur organisasi?
 					</div>

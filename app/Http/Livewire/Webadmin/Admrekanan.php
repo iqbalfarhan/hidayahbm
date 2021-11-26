@@ -29,6 +29,7 @@ class Admrekanan extends Component
     public function edit($id)
     {
         $rekanan = Rekanan::find($id);
+        
         $this->selected = $id;
         $this->ednama = $rekanan->nama;
         $this->gambar = $rekanan->gambar;
@@ -37,7 +38,7 @@ class Admrekanan extends Component
 
     public function delete($id)
     {
-        $this->selected = Rekanan::find($id);
+        $this->selected = $id;
         $this->dispatchBrowserEvent('openModal', ['id' => 'deleteRekanan']);
     }
 
