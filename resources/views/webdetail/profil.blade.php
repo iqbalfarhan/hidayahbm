@@ -21,8 +21,8 @@
 			<div class="sidebar-links">
 				<h4>Lihat juga</h4>
 				<ul class="list-unstyled">
-					<li><i class="bx bx-chevron-right"></i> <a href="">Legalitas & Lisensi</a></li>
-					<li><i class="bx bx-chevron-right"></i> <a href="">Struktur Organisasi</a></li>
+					<li><i class="bx bx-chevron-right"></i> <a href="{{ route('guest.legalitas') }}">Legalitas & Lisensi</a></li>
+					<li><i class="bx bx-chevron-right"></i> <a href="{{ route('guest.index') }}#strorg">Struktur Organisasi</a></li>
 				</ul>
 			</div>
 		</div>

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Webadmin;
 
 use App\Paket;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -13,6 +14,7 @@ class Admpaket extends Component
     public $datas;
     public $selected;
     public $no = 1;
+    public $existPhoto;
 
     public $nama;
     public $list_menu;
@@ -39,16 +41,17 @@ class Admpaket extends Component
         $this->selected = $id;
         $this->ednama = $paket->nama;
         $this->edlist_menu = implode("\n", json_decode($paket->list_menu));
-        $this->edphoto = $paket->photo;
+        $this->gambar = $paket->gambar;
         $this->edharga = $paket->harga;
         $this->edketerangan = $paket->keterangan;
         $this->edterlaris = $paket->terlaris;
+
         $this->dispatchBrowserEvent('openModal', ['id' => 'editPaket']);
     }
 
     public function delete($id)
     {
-        $this->selected = Paket::find($id)->toArray();
+        $this->selected = $id;
         $this->dispatchBrowserEvent('openModal', ['id' => 'deletePaket']);
     }
 
@@ -57,7 +60,6 @@ class Admpaket extends Component
         $val = $this->validate([
             'ednama' => 'required',
             'edlist_menu' => 'required',
-            'edphoto' => '',
             'edharga' => '',
             'edketerangan' => '',
             'edterlaris' => '',
@@ -68,11 +70,27 @@ class Admpaket extends Component
         Paket::find($id)->update([
             'nama' => $this->ednama,
             'list_menu' => json_encode($list_menu_dep),
-            'photo' => $this->edphoto,
             'harga' => $this->edharga,
             'keterangan' => $this->edketerangan,
             'terlaris' => $this->edterlaris ? 1 : 0,
         ]);
+
+        if ($this->photo) {
+            $filename = $this->photo->getClientOriginalName();
+            $this->photo->storeAs('paket', $filename);
+
+            Paket::find($id)->update([
+                'photo' => '/storage/paket/'.$filename
+            ]);
+
+            $this->reset('existPhoto');
+        }
+
+        if ($this->existPhoto) {
+            Paket::find($id)->update([
+                'photo' => '/storage/'.$this->existPhoto
+            ]);
+        }
 
         $this->mount();
         $this->dispatchBrowserEvent('closeModal', ['id' => 'editPaket']);
@@ -80,7 +98,7 @@ class Admpaket extends Component
             'selected',
             'ednama',
             'edlist_menu',
-            'edphoto',
+            'photo',
             'edharga',
             'edketerangan',
             'edterlaris',
@@ -109,17 +127,33 @@ class Admpaket extends Component
 
         $list_menu_dep = explode("\n", str_replace("\r", "", $this->list_menu));
 
-        Paket::create([
+        $paket = Paket::create([
             'nama' => $this->nama,
+            'slug' => Str::slug($this->nama, '-'),
             'list_menu' => json_encode($list_menu_dep),
-            'photo' => $this->photo,
             'harga' => $this->harga,
             'keterangan' => $this->keterangan,
             'terlaris' => $this->terlaris ? 1 : 0,
         ]);
 
+        if ($this->photo) {
+            $filename = $this->photo->getClientOriginalName();
+            $this->photo->storeAs('paket', $filename);
+
+            Paket::find($paket->id)->update([
+                'photo' => '/storage/paket/'.$filename
+            ]);
+
+            $this->reset('existPhoto');
+        }
+
+        if ($this->existPhoto) {
+            Paket::find($paket->id)->update([
+                'photo' => '/storage/'.$this->existPhoto
+            ]);
+        }
+
         $this->mount();
-        $this->dispatchBrowserEvent('closeModal', ['id' => 'createPaket']);
         $this->reset([
             'nama',
             'list_menu',
@@ -128,6 +162,7 @@ class Admpaket extends Component
             'keterangan',
             'terlaris',
         ]);
+        $this->dispatchBrowserEvent('closeModal', ['id' => 'create']);
     }
 
     public function render()

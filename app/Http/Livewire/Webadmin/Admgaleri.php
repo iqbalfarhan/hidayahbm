@@ -50,7 +50,7 @@ class Admgaleri extends Component
         $this->mount();
     }
 
-    public function selectFile($file)
+    public function pilihFile($file)
     {
         $this->selectedFile = $file;
         $this->dispatchBrowserEvent('openModal', ['id' => 'deleteFile']);

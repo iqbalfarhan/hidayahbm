@@ -6,7 +6,7 @@
                     <h3 class="card-title mb-0">Kegiatan</h3>
                 </div>
                 <div class="col-md-6 text-right">
-                    <button data-toggle="modal" data-target="#createKegiatan" class="btn btn-primary btn-sm"><i class="fa fa-plus mr-2"></i>Tambah</button>
+                    
                 </div>
             </div>
         </div>
@@ -113,6 +113,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
+                                <label class="form-control-label">Tag tersedia</label><br>
                                 @foreach ($tags as $tg)
                                     <button type="button" wire:click="$set('tag', '{{ $tg }}')" class="btn btn-primary btn-sm">{{ $tg }}</button>
                                 @endforeach
@@ -154,6 +155,9 @@
                                 <span class="invalid-feedback">{{ $errors->first('judul') }}</span>
                                 @endif
                             </div>
+                            @if ($gambar)
+                                <img src="{{ url($gambar) }}" alt="" class="avatar">
+                            @endif
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -170,9 +174,6 @@
                                     @endif
                                 </div>
                                 <div class="col-md-6">
-                                    @if ($gambar)
-                                        <img src="{{ url($gambar) }}" alt="" class="avatar">
-                                    @endif
                                     @if ($photo == "")
                                     <div class="form-group">
                                         <label class="form-control-label" for="existPhoto">Atau pilih photo yang sudah ada</label>
@@ -204,6 +205,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
+                                    <label class="form-control-label">Tag tersedia</label><br>
                                     @foreach ($tags as $tg)
                                         <button type="button" wire:click="$set('tag', '{{ $tg }}')" class="btn btn-primary btn-sm">{{ $tg }}</button>
                                     @endforeach
@@ -231,7 +233,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"></h5>
+                    <h5 class="modal-title">Konfirmasi Hapus kegiatan</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

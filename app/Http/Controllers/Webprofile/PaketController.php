@@ -10,6 +10,7 @@ class PaketController extends Controller
     public function index()
     {
         $data = [
+            'withNew' => true,
             'title' => 'Paket menu',
             'page' => 'webadmin.admpaket'
         ];

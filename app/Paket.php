@@ -8,6 +8,7 @@ class Paket extends Model
 {
     protected $fillable = [
         'nama',
+        'slug',
         'list_menu',
         'photo',
         'harga',

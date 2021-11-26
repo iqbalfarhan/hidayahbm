@@ -15,10 +15,10 @@ class WebController extends Controller
         return view('layouts.landing');
     }
 
-    public function menu(Request $request)
+    public function menu($slug = null)
     {
-        if ($request->paket) {
-            $datas = Paket::find($request->paket);
+        if ($slug) {
+            $datas = Paket::where('slug', $slug)->first();
         }
         else{
             $datas = Paket::all();
@@ -27,7 +27,7 @@ class WebController extends Controller
         $data = [
             'title' => 'Daftar Menu',
             'datas' => $datas,
-            'view' => $request->paket ? "single" : "all"
+            'view' => $slug ? "single" : "all"
         ];
         return view('webdetail.paket', $data);
     }

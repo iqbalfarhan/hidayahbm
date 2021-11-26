@@ -1,38 +1,44 @@
 @extends('layouts.inner')
 
 @section('content')
-<div class="pricing">
-	@if ($view == "single")
-	<div class="row">
-		<div class="col-md-8">
-			<h4 class="">{{ $datas->nama }}</h4>
-			<div class="row">
-				<div class="col-md-6">
-					<img src="{{ url($datas->gambar) }}" alt="" class="w-100 rounded">
-				</div>
-				<div class="col-md-6">
-					<ul>
-						@foreach (json_decode($datas->list_menu) as $menu)
-						<li><i class="bx bx-check"></i> {{ $menu }}</li>
-						@endforeach
-					</ul>
-				</div>
+@if ($view == "single")
+<div class="section-title">
+	<h2>{{ $datas->nama }}</h2>
+</div>
+<div class="row">
+	<div class="col-md-8">
+		<div class="row">
+			<div class="col-md-6">
+				<img src="{{ url($datas->gambar) }}" alt="" class="w-100 rounded shadow">
 			</div>
-
-			<button class="btn btn-success"><i class="bx bx-whatsapp mr-2"></i>Tanya tentang paket</button>
-		</div>
-		<div class="col-md-4">
-			<h5 class="">Menu lainnya :</h5>
-			<div class="list-group">
-				@foreach (App\Paket::all() as $paket)
-				<a href="{{ route('guest.menu', ['paket' => $paket->id]) }}" class="list-group-item">{{ $paket->nama }}</a>
-				@endforeach
+			<div class="col-md-6">
+				<b>Menu dalam tiap paket</b>
+				<ul class="list-unstyled">
+					@foreach (json_decode($datas->list_menu) as $menu)
+					<li><i class="bx bx-check"></i> {{ $menu }}</li>
+					@endforeach
+				</ul>
 			</div>
 		</div>
 	</div>
-	@endif
+	<div class="col-md-4">
+		<div class="">
+			<div class="sidebar-links">
+				<h4>Paket menu lainnya</h4>
+				<ul class="list-unstyled">
+					@foreach (App\Paket::all() as $paket)
+					<li><i class="bx bx-chevron-right"></i> <a href="{{ route('guest.menu',$paket->slug) }}">{{ $paket->nama }}</a></li>
+					@endforeach
+					<li><i class="bx bx-chevron-right"></i> <a href="{{ route('guest.menu') }}">Semua paket menu</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+@endif
 
-	@if ($view == "all")
+@if ($view == "all")
+<div class="pricing">
 	<div class="section-title">
 		<h2>Contoh paket</h2>
 	</div>
@@ -41,16 +47,17 @@
 		<div class="col-lg-4 mt-4 mt-lg-0 mb-4" data-aos="fade-up" data-aos-delay="200">
 			<div class="box {{ $paket->terlaris == 1 ? "featured" : "" }}">
 				<h3>{{ $paket->nama }}</h3>
+				<img src="{{ url($paket->gambar) }}" alt="" class="w-100 rounded shadow">
 				<ul>
 					@foreach (json_decode($paket->list_menu) as $menu)
 					<li><i class="bx bx-check"></i> {{ $menu }}</li>
 					@endforeach
 				</ul>
-				<a href="{{ route('guest.menu', ['paket' => $paket->id]) }}" class="buy-btn">Detail Paket</a>
+				<a href="{{ route('guest.menu', $paket->slug) }}" class="buy-btn">Detail Paket</a>
 			</div>
 		</div>
 		@endforeach
 	</div>
-	@endif
 </div>
+@endif
 @endsection
