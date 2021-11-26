@@ -125,6 +125,14 @@ class Admlegalitas extends Component
         $legal->delete();
 
         $this->mount();
+        $this->dispatchBrowserEvent('closeModal', ['id' => 'deleteLegalitas']);
+        $this->reset('selected');
+    }
+
+    public function deleteLegalitas($legalitas_id)
+    {
+        $this->selected = $legalitas_id;
+        $this->dispatchBrowserEvent('openModal', ['id' => 'deleteLegalitas']);
     }
 
     public function render()

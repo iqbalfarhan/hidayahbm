@@ -6,13 +6,18 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Kegiatan;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Admkegiatan extends Component
 {
+    use WithFileUploads;
+
     public $no = 1;
     public $datas;
-    public $files;
     public $tags;
+    public $existPhoto;
+    public $gambar;
+    public $selected;
 
     public $judul;
     public $slug;
@@ -22,11 +27,8 @@ class Admkegiatan extends Component
 
     public function mount()
     {
-        $this->files = Storage::allFiles();
         $this->datas = Kegiatan::all();
         $this->tags = Kegiatan::distinct('tag')->pluck('tag');
-
-        $this->isi = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
     }
 
     public function simpanKegiatan()
@@ -37,16 +39,112 @@ class Admkegiatan extends Component
             'tag' => 'required',
         ]);
 
-        Kegiatan::create([
+        $kegiatan = Kegiatan::create([
             'judul' => $this->judul,
             'slug' => Str::slug($this->judul, "-"),
-            'photo' => $this->photo ?? null,
             'isi' => $this->isi,
             'tag' => $this->tag,
         ]);
 
+        if ($this->photo) {
+            $filename = $this->photo->getClientOriginalName();
+            $this->photo->storeAs('kegiatan', $filename);
+
+            Kegiatan::find($kegiatan->id)->update([
+                'photo' => '/storage/kegiatan/'.$filename
+            ]);
+        }
+
+        if ($this->existPhoto) {
+            Kegiatan::find($kegiatan->id)->update([
+                'photo' => '/storage/'.$this->existPhoto
+            ]);
+        }
+
+        $this->reset([
+            'judul',
+            'slug',
+            'photo',
+            'isi',
+            'tag',
+        ]);
         $this->mount();
-        $this->dispatchBrowserEvent('closeModal', ['id' => 'createKegiatan']);
+        $this->dispatchBrowserEvent('closeModal', ['id' => 'create']);
+    }
+
+    public function edit($kegiatan_id)
+    {
+        $this->selected = $kegiatan_id;
+
+        $kegiatan = Kegiatan::find($kegiatan_id);
+
+        $this->judul = $kegiatan->judul;
+        $this->slug = $kegiatan->slug;
+        $this->gambar = $kegiatan->gambar;
+        $this->isi = $kegiatan->isi;
+        $this->tag = $kegiatan->tag;
+
+        $this->dispatchBrowserEvent('openModal', ['id' => 'editKegiatan']);
+    }
+
+    public function updateKegiatan()
+    {
+        $this->validate([
+            'judul' => 'required',
+            'isi' => 'required',
+            'tag' => 'required',
+        ]);
+
+        $kegiatan = Kegiatan::find($this->selected)->update([
+            'judul' => $this->judul,
+            'slug' => Str::slug($this->judul, "-"),
+            'isi' => $this->isi,
+            'tag' => $this->tag,
+        ]);
+
+        if ($this->photo) {
+            $filename = $this->photo->getClientOriginalName();
+            $this->photo->storeAs('kegiatan', $filename);
+
+            Kegiatan::find($this->selected)->update([
+                'photo' => '/storage/kegiatan/'.$filename
+            ]);
+        }
+
+        if ($this->existPhoto) {
+            Kegiatan::find($this->selected)->update([
+                'photo' => '/storage/'.$this->existPhoto
+            ]);
+        }
+
+        $this->reset([
+            'judul',
+            'slug',
+            'photo',
+            'gambar',
+            'isi',
+            'tag',
+        ]);
+        $this->mount();
+        $this->dispatchBrowserEvent('closeModal', ['id' => 'editKegiatan']);
+    }
+
+    public function delete($kegiatan_id)
+    {
+        $this->selected = $kegiatan_id;
+        $this->dispatchBrowserEvent('openModal', ['id' => 'deleteKegiatan']);
+    }
+
+    public function deleteKegiatan()
+    {
+        Kegiatan::find($this->selected)->delete();
+
+        $this->reset([
+            'selected'
+        ]);
+
+        $this->mount();
+        $this->dispatchBrowserEvent('closeModal', ['id' => 'deleteKegiatan']);
     }
 
     public function render()

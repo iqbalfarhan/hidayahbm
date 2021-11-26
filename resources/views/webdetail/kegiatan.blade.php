@@ -15,7 +15,7 @@
 				<div class="sidebar-links">
 					<h4>Kegiatan lainnya</h4>
 					<ul class="list-unstyled">
-						@foreach (App\Kegiatan::all() as $kegiatan)
+						@foreach (App\Kegiatan::latest()->get() as $kegiatan)
 						<li>
 							<i class="bx bx-chevron-right"></i>
 							<a href="{{ route('guest.kegiatan', $kegiatan->slug) }}">

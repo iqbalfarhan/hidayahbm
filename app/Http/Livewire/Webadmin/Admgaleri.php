@@ -20,7 +20,8 @@ class Admgaleri extends Component
     public $selectedFile;
 
     public $queryString = [
-        'path'
+        'path',
+        'selectedFile'
     ];
 
     public function mount()

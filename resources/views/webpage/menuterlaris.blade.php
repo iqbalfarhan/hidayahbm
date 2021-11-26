@@ -3,6 +3,7 @@
 
 		<div class="section-title">
 			<h2>Menu terlaris</h2>
+			<p>Berikut adalah sample menu yang biasa kami tawarkan kepada konsumen, MENU TIDAK MENETAP akan ada roling nya secara berkala dan tergantung dengan permintaan mitra kerja kami.</p>
 		</div>
 
 		<div class="row justify-content-center">

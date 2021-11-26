@@ -10,6 +10,8 @@ class KegiatanController extends Controller
     public function index()
     {
         $data = [
+            'withNew' => true,
+            'title' => 'Kegiatan',
             'page' => 'webadmin.admkegiatan'
         ];
         return view('drawer', $data);

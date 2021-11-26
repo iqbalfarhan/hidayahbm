@@ -6,7 +6,6 @@
                     <h3 class="card-title mb-0">Photo File Manager</h3>
                 </div>
                 <div class="col-md-6 text-right">
-                    <button data-toggle="modal" data-target="#uploadGambar" class="btn btn-primary btn-sm mx-0"><i class="fa fa-upload mr-2"></i>upload</button>
                     <select class="btn btn-sm mx-0 btn-primary" wire:model="filterpath">
                         <option value="">Pilih path</option>
                         @foreach ($dirs as $dir)
@@ -21,11 +20,11 @@
             <div class="row">
                 @if ($path == "")
                     @foreach ($dirs as $dir)
-                    <div class="col-md-2 text-center" wire:click="$set('path', '{{ $dir }}')">
-                        <div class="card shadow mb-3">
+                    <div class="col-md-2 text-center mb-3" wire:click="$set('path', '{{ $dir }}')">
+                        <div class="card shadow h-100">
                             <div class="card-body">
                                 <h1 class="display-1"><i class="fa fa-folder"></i></h1>
-                                <small>{{ $dir }}</small>
+                                <strong>{{ $dir }}</strong>
                             </div>
                         </div>
                     </div>
@@ -33,11 +32,11 @@
                 @endif
 
                 @foreach ($files as $file)
-                    <div class="col-md-2 text-center">
-                        <div class="card shadow mb-3">
+                    <div class="col-md-2 text-center mb-3">
+                        <div class="card shadow h-100">
                             <div class="card-body" wire:click="selectFile('{{ $file }}')">
-                                <img src="{{ url('/storage/'.$file) }}" alt="" class="w-100">
-                                <small>{{ $file }}</small>
+                                <img src="{{ url('/storage/'.$file) }}" alt="" class="w-100 mb-3">
+                                <strong>{{ $file }}</strong>
                             </div>
                         </div>
                     </div>

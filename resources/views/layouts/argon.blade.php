@@ -88,7 +88,7 @@
               </li>
             @endif
             <li class="nav-item">
-              <a href="" class="nav-link"><i class="fa fa-globe"></i> Preview web</a>
+              <a href="{{ route('guest.index') }}" class="nav-link"><i class="fa fa-globe"></i> Preview web</a>
             </li>
           </ul>
           @livewire('comp.usernav')
