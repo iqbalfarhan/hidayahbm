@@ -23,6 +23,12 @@
 							</a>
 						</li>
 						@endforeach
+						<li>
+							<i class="bx bx-chevron-right"></i>
+							<a href="{{ route('guest.kegiatan') }}">
+								Semua Kegiatan
+							</a>
+						</li>
 					</ul>
 				</div>
 			</div>

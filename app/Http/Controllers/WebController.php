@@ -25,6 +25,7 @@ class WebController extends Controller
         }
 
         $data = [
+            'bread' => ['Paket menu', $slug ?? 'semua menu'],
             'title' => 'Daftar Menu',
             'datas' => $datas,
             'view' => $slug ? "single" : "all"

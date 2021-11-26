@@ -33,7 +33,7 @@
 	</div>
 
 	<div class="row">
-		<div class="col-md-12 text-center">
+		<div class="col-md-12 text-center pricing">
 			<a href="{{ route('guest.kegiatan') }}" class="buy-btn">Kegiatan Lainnya</a>
 		</div>
 	</div>

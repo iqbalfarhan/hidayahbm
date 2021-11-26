@@ -5,7 +5,7 @@
 <nav id="navbar" class="navbar navbar-light">
 	<ul>
 		@auth
-			<li><a class="nav-link-btn btn btn-border border-info" href="{{ route('home') }}">Masuk</a></li>
+			<li><a class="nav-link" href="{{ route('home') }}#hero">Masuk</a></li>
 		@endauth
 		<li><a class="nav-link scrollto active" href="{{ url('/') }}#hero">Home</a></li>
 		<li class="dropdown">

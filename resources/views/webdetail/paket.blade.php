@@ -12,12 +12,15 @@
 				<img src="{{ url($datas->gambar) }}" alt="" class="w-100 rounded shadow">
 			</div>
 			<div class="col-md-6">
-				<b>Menu dalam tiap paket</b>
+				<h5><strong>List makanan</strong></h5>
 				<ul class="list-unstyled">
 					@foreach (json_decode($datas->list_menu) as $menu)
-					<li><i class="bx bx-check"></i> {{ $menu }}</li>
+					<li class="my-1"><i class="text-info bx bx-check"></i> {{ $menu }}</li>
 					@endforeach
 				</ul>
+
+				<h5><strong>Keterangan</strong></h5>
+				<p>{{ $datas->keterangan }}</p>
 			</div>
 		</div>
 	</div>
@@ -40,7 +43,8 @@
 @if ($view == "all")
 <div class="pricing">
 	<div class="section-title">
-		<h2>Contoh paket</h2>
+		<h2>Semua menu</h2>
+		<p>menu bisa dalam bentuk pack meal/kotakan dan kami menerima order dalam bentuk request order menu atau custom menu</p>
 	</div>
 	<div class="row">
 		@foreach ($datas as $paket)

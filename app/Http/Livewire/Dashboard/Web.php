@@ -13,6 +13,7 @@ class Web extends Component
     public $datas;
     public $params;
     public $logo;
+    public $ilustrasi;
 
     public $parameter;
     public $value;
@@ -20,10 +21,16 @@ class Web extends Component
     public $newparameter;
     public $newvalue;
 
+    public $allowAdd = false;
+
+    public $queryString = [
+        'allowAdd'
+    ];
+
     public function mount()
     {
         $this->datas = Perusahaan::all();
-        $this->params = Perusahaan::where('parameter', '!=', 'logo')->get()->pluck('parameter');
+        $this->params = Perusahaan::whereNotIn('parameter', ['logo', 'ilustrasi'])->get()->pluck('parameter');
     }
 
     public function updatedParameter($param)
@@ -75,6 +82,26 @@ class Web extends Component
         ]);
 
         $this->dispatchBrowserEvent('closeModal', ['id' => 'uploadPhoto']);
+    }
+
+    public function storeIlustrasi()
+    {
+        $this->validate([
+            'ilustrasi' => 'required|image'
+        ]);
+
+        $filename = $this->ilustrasi->getClientOriginalName();
+        $this->ilustrasi->storeAs('/', $filename);
+        $this->mount();
+
+        Perusahaan::updateOrCreate([
+            'parameter' => 'ilustrasi'
+        ], [
+            'parameter' => 'ilustrasi',
+            'value' => '/storage/'.$filename
+        ]);
+
+        $this->dispatchBrowserEvent('closeModal', ['id' => 'uploadIlustrasi']);
     }
 
     public function simpanData()

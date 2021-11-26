@@ -12,7 +12,9 @@
 			<div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="200">
 				<div class="box featured">
 					<h3>{{ $paket->nama }}</h3>
-					{{-- <h4><sup>Rp</sup>{{ $paket->price }}<span>per pax</span></h4> --}}
+					<div class="text-center">
+						<img src="{{ $paket->gambar }}" alt="" class="avatar w-100 rounded shadow">
+					</div>
 					<ul>
 						@foreach (json_decode($paket->list_menu) as $menu)
 							<li><i class="bx bx-check"></i> {{ $menu }}</li>

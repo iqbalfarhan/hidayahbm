@@ -12,8 +12,8 @@
 					<div class="icon mb-3">
 						<i class="{{ $layanan->icon }}"></i>
 					</div>
-					<h4 class="text-truncate"><a href="">{{ $layanan->nama }}</a></h4>
-					<p class="">{{ $layanan->keterangan }}</p>
+					<h4 class=""><a href="">{{ $layanan->nama }}</a></h4>
+					<p class="text-truncate">{{ $layanan->keterangan }}</p>
 				</div>
 			</div>
 			@endforeach
