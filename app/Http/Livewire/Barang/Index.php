@@ -8,10 +8,17 @@ use Livewire\Component;
 class Index extends Component
 {
     public $datas;
+    public $no = 1;
+    public $status;
     public $selected;
+    public $filter = false;
 
     protected $listeners = [
         'reload' => 'reload'
+    ];
+
+    public $queryString = [
+        'status'
     ];
 
     public function reload()
@@ -27,7 +34,18 @@ class Index extends Component
 
     public function fetchData()
     {
+        $this->status = $this->status ?? null;
         $this->datas = Barang::all();
+
+        if ($this->status) {
+            $this->datas = $this->datas->where('status_stok', $this->status);
+        }
+
+    }
+
+    public function updatedStatus($status)
+    {
+        $this->fetchData();
     }
 
     public function edit($barang_id)

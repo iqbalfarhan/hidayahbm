@@ -19,6 +19,7 @@ class CreateBarangsTable extends Migration
             $table->string('sku')->nullable();
             $table->string('satuan');
             $table->string('keterangan')->nullable();
+            $table->integer('min_stok')->default(0);
             $table->timestamps();
         });
     }

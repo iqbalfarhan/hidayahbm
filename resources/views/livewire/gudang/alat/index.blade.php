@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="table-responsive">
-            <table class="table align-items-center table-flush">
+            <table class="table align-items-center table-sm">
                 <thead class="thead-light">
                     <tr>
                         <th scope="col">No</th>
@@ -26,13 +26,13 @@
                     @foreach ($datas as $data)
                         <tr>
                             <td>{{ $no++ }}</td>
-                            <td class="py-2">
+                            <td class="py-1">
                                 <img src="{{ url($data->gambar) }}" alt="" class="avatar">
                             </td>
                             <td>{{ $data->nama }}</td>
                             <td>{{ $data->jumlah }}</td>
                             <td>{{ $data->kode }}</td>
-                            <td class="p-2 text-center">
+                            <td class="py-2 text-center">
                                 <button wire:click="edit({{ $data->id }})" class="btn btn-success btn-sm mx-0"><i class="fa fa-edit"></i></button>
                                 <button wire:click="hapus({{ $data->id }})" class="btn btn-danger btn-sm mx-0"><i class="fa fa-trash"></i></button>
                             </td>

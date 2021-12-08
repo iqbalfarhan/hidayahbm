@@ -29,6 +29,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/profile', 'HomeController@profile')->name('profile');
     Route::get('/terminal', 'HomeController@terminal')->name('terminal');
+    Route::get('/dokumentasi/{tipe}', 'HomeController@dokumentasi')->name('dokumentasi');
 
     Route::group(['prefix' => 'finance', 'middleware' => 'ceklevel:finance'], function(){
         Route::get('transaksi', 'Finance\TransaksiController@index')->name('finance.transaksi.index');

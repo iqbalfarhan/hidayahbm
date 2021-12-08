@@ -12,12 +12,14 @@ class Transaksi extends Component
     use WithFileUploads;
 
     public $barangs = [];
+    public $no = 1;
+
     public $sku;
     public $nonsku;
     public $listnonsku;
     public $keterangan;
 
-    public $jenis = 'tambah';
+    public $jenis;
 
     public $queryString = ['jenis'];
 
@@ -101,7 +103,7 @@ class Transaksi extends Component
         // $this->emit('reload');
         // $this->dispatchBrowserEvent('closeModal', ['id' => 'transaksiBarang']);
 
-        return redirect()->route('barang.index');
+        return redirect()->route('transaksi.index');
     }
 
     public function unset($key)

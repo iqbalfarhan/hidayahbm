@@ -10,7 +10,7 @@ class BarangController extends Controller
     public function index()
     {
         $data = [
-            'title' => 'Data barang',
+            'title' => 'Data bahan makanan',
             'page' => 'barang.index',
         ];
         return view('drawer', $data);

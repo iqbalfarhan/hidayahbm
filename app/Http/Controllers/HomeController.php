@@ -40,4 +40,14 @@ class HomeController extends Controller
 
         return view('drawer', $data);
     }
+
+    public function dokumentasi($tipe)
+    {
+        $data = [
+            'title' => 'Panduan penggunaan aplikasi',
+            'page' => 'dokumentasi.'.$tipe
+        ];
+
+        return view('drawer', $data);
+    }
 }

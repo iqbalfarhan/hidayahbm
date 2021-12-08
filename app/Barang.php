@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Barang extends Model
 {
-    protected $fillable = ['nama', 'keterangan', 'satuan', 'sku', 'photo'];
+    protected $fillable = ['nama', 'keterangan', 'satuan', 'sku', 'photo', 'min_stok'];
     protected $hidden = ['id', 'created_at', 'updated_at'];
 
-    protected $appends = ['stok', 'gambar'];
+    protected $appends = ['stok', 'gambar', 'status_stok_color', 'status_stok'];
 
     public function getStokAttribute()
     {
@@ -26,13 +26,34 @@ class Barang extends Model
         return $this->photo ?? '/storage/noimage.jpg';
     }
 
-    public function www($arg)
-    {
-        return $arg == 2 ? "dua" : "bukan dua";
-    }
-
     public function riwayat()
     {
-        return Tranbarang::orderBy('tanggal', 'DESC')->where('barang_id', $this->id)->get();
+        return Tranbarang::where('barang_id', $this->id)->latest()->get()->take(10);
+    }
+
+    public function getStatusStokColorAttribute()
+    {
+        if ($this->getStatusStokAttribute() == "habis") {
+            return "danger";
+        }
+        elseif ($this->getStatusStokAttribute() == "kurang") {
+            return "warning";
+        }
+        else{
+            return "info";
+        }
+    }
+
+    public function getStatusStokAttribute()
+    {
+        if($this->getStokAttribute() == 0){
+            return "habis";
+        }
+        elseif ($this->getStokAttribute() <= $this->min_stok) {
+            return "kurang";
+        }
+        else{
+            return "aman";
+        }
     }
 }

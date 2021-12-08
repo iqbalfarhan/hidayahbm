@@ -1,69 +1,87 @@
 <div>
-	<div class="row justify-content-center">
-		<div class="col-md-3">
-			<div class="card bg-gradient-danger border-0">
-				<div class="card-body">
-					<div class="row">
-						<div class="col">
-							<h5 class="card-title text-uppercase text-muted mb-0 text-white">stok bahan < 5</h5>
-							<span class="h2 font-weight-bold mb-0 text-white">{{ $barangs->where('stok', '<', 5)->count() }}</span>
-							<div class="progress progress-xs mt-3 mb-0">
-								<div class="progress-bar bg-success" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%;"></div>
-							</div>
-						</div>
-						<div class="col-auto">
-							<button type="button" class="btn btn-sm btn-neutral mr-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<i class="fas fa-ellipsis-h"></i>
-							</button>
-							<div class="dropdown-menu dropdown-menu-right">
-								<a class="dropdown-item" href="#">Action</a>
-								<a class="dropdown-item" href="#">Another action</a>
-								<a class="dropdown-item" href="#">Something else here</a>
-							</div>
-						</div>
-					</div>
-					<p class="mt-3 mb-0 text-sm">
-						<a href="{{ route('barang.index') }}" class="text-nowrap text-white font-weight-600">See details</a>
-					</p>
+	<div class="card">
+		<div class="card-header border-0">
+			<div class="row align-items-center">
+				<div class="col-md-6">
+					<h3 class="card-title mb-0">Status stok bahan makanan</h3>
+				</div>
+				<div class="col-md-6 text-right">
+					
 				</div>
 			</div>
 		</div>
-		<div class="col-md-3">
-			
-		</div>
-		<div class="col-md-6">
-			<div class="card shadow">
-				<div class="card-header border-0">
-					<h3 class="mb-0">Cari bahan makanan</h3>
+		<div class="card-body py-0">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="card bg-gradient-primary border-0">
+						<div class="card-body">
+							<div class="row align-items-center">
+								<div class="col-3">
+									<h1 class="m-0 text-white text-center">
+										<i class="fas fa-box"></i>
+									</h1>
+								</div>
+								<div class="col-auto">
+									<h5 class="card-title text-uppercase text-muted mb-0 text-white">Total B. Makanan</h5>
+									<span class="h2 font-weight-bold mb-0 text-white">{{ $barangs->count() }} <small>bahan</small></span>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-				<div class="card-body">
-					<div class="form-group">
-						<label class="form-control-label" for="sku">Cari barang dengan SKU</label>
-						<input type="search" class="form-control @error('sku') is-invalid @enderror" id="sku" wire:model="sku" placeholder="Scan barcode barang">
-						@if($errors->has('sku'))
-						<span class="invalid-feedback">{{ $errors->first('sku') }}</span>
-						@endif
-					</div>	
-					@if ($barang)
-					<table class="table table-bordered table-sm">
-						<tr>
-							<th>Nama Produk</th>
-							<td>{{ $barang->nama }}</td>
-						</tr>
-						<tr>
-							<th>Keterangan</th>
-							<td>{{ $barang->keterangan }}</td>
-						</tr>
-						<tr>
-							<th>SKU</th>
-							<td>{{ $barang->sku }}</td>
-						</tr>
-						<tr>
-							<th>Stok</th>
-							<td class="text-red"><strong>{{ $barang->stok }}</strong> {{ $barang->satuan }}</td>
-						</tr>
-					</table>
-					@endif
+
+				<div class="col-md-3">
+					<div class="card bg-gradient-danger border-0">
+						<div class="card-body">
+							<div class="row align-items-center">
+								<div class="col-3">
+									<h1 class="m-0 text-white text-center">
+										<i class="fas fa-business-time"></i>
+									</h1>
+								</div>
+								<div class="col-auto">
+									<h5 class="card-title text-uppercase text-muted mb-0 text-white">Stok Bahan kurang</h5>
+									<span class="h2 font-weight-bold mb-0 text-white">{{ $barangs->where('status_stok', 'kurang')->count() }} <small>bahan</small></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3">
+					<div class="card bg-gradient-warning border-0">
+						<div class="card-body">
+							<div class="row align-items-center">
+								<div class="col-3">
+									<h1 class="m-0 text-white text-center">
+										<i class="fas fa-box-open"></i>
+									</h1>
+								</div>
+								<div class="col-auto">
+									<h5 class="card-title text-uppercase text-muted mb-0 text-white">Stok Bahan habis</h5>
+									<span class="h2 font-weight-bold mb-0 text-white">{{ $barangs->where('status_stok', 'habis')->count() }} <small>bahan</small></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3">
+					<div class="card bg-gradient-info border-0">
+						<div class="card-body">
+							<div class="row align-items-center">
+								<div class="col-3">
+									<h1 class="m-0 text-white text-center">
+										<i class="fas fa-archive"></i>
+									</h1>
+								</div>
+								<div class="col-auto">
+									<h5 class="card-title text-uppercase text-muted mb-0 text-white">Stok Bahan Aman</h5>
+									<span class="h2 font-weight-bold mb-0 text-white">{{ $barangs->where('status_stok', 'aman')->count() }} <small>bahan</small></span>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
